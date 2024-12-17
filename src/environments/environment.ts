@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'https://abundant-cherice-daniel-arias-557ce145.koyeb.app/api',
+  api: 'http://localhost:3000',
 };

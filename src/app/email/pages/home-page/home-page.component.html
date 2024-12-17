@@ -1,75 +1,77 @@
-<div class="d-flex justify-content-center align-items-center mt-4 gap-4">
-  <div class="d-flex justify-content-center align-items-center">
-    <img
-      src="./unipamplona_64.png"
-      width="125"
-      alt="logo Angular"
-      class="img-fluid"
-    />
+<div class="background-container">
+  <div class="d-flex justify-content-center align-items-center mt-4 gap-4">
+    <div class="d-flex justify-content-center align-items-center">
+      <img
+        src="./unipamplona_64.png"
+        width="125"
+        alt="logo Angular"
+        class="img-fluid"
+      />
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <img
+        src="./facultad_ingenierias.png"
+        alt="logo Angular"
+        class="img-fluid"
+        width="150"
+      />
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+      <img src="./AZUL.png" width="250" alt="logo Angular" class="img-fluid" />
+    </div>
   </div>
-  <div class="d-flex justify-content-center align-items-center">
-    <img
-      src="./facultad_ingenierias.png"
-      alt="logo Angular"
-      class="img-fluid"
-      width="150"
-    />
+  <h1 class="text-center mt-4">Correos - API Google Gmail</h1>
+  @if(isLoading){
+  <div class="d-flex justify-content-center mt-4">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   </div>
-  <div class="d-flex justify-content-center align-items-center">
-    <img src="./AZUL.png" width="250" alt="logo Angular" class="img-fluid" />
+  }@else {
+  <div class="table-responsive shadow rounded-4 mt-4">
+    <table class="table table-hover rounded-4">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">From:</th>
+          <th scope="col">Info:</th>
+          <th scope="col">Received:</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (email of emails; track $index) {
+        <tr>
+          <th scope="row">{{ $index + 1 }}</th>
+          <td>
+            <p class="fw-bold">
+              <span class="fw-normal">{{ email.from }}</span>
+            </p>
+          </td>
+          <td>
+            <p>
+              <span class="badge fw-normal text-bg-dark">{{
+                email.subject
+              }}</span>
+              - {{ email.snippet }}
+            </p>
+          </td>
+          <td>
+            <p class="fw-bold">
+              <span class="badge fw-normal text-bg-success">{{
+                email.received | date : "dd/MM/yyyy"
+              }}</span>
+            </p>
+          </td>
+          <td>
+            <button mat-fab color="warn" (click)="onDelete(email.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
   </div>
+  }
 </div>
-<h1 class="text-center mt-4">Correos - API Google Gmail</h1>
-@if(isLoading){
-<div class="d-flex justify-content-center mt-4">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-</div>
-}@else {
-<div class="table-responsive shadow rounded-4 mt-4">
-  <table class="table table-hover rounded-4">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">From:</th>
-        <th scope="col">Info:</th>
-        <th scope="col">Received:</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (email of emails; track $index) {
-      <tr>
-        <th scope="row">{{ $index + 1 }}</th>
-        <td>
-          <p class="fw-bold">
-            <span class="fw-normal">{{ email.from }}</span>
-          </p>
-        </td>
-        <td>
-          <p>
-            <span class="badge fw-normal text-bg-dark">{{
-              email.subject
-            }}</span>
-            - {{ email.snippet }}
-          </p>
-        </td>
-        <td>
-          <p class="fw-bold">
-            <span class="badge fw-normal text-bg-success">{{
-              email.received | date : "dd/MM/yyyy"
-            }}</span>
-          </p>
-        </td>
-        <td>
-          <button mat-fab>
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </tr>
-      }
-    </tbody>
-  </table>
-</div>
-}
